@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}首页{% endblock title %}
+{% block body %}
+  <body>
+    <!-- Custom styles for this template -->
+    <link href="{% static 'index_files/album.css' %}" rel="stylesheet">
+    <header>
+  <div class="bg-dark" id="navbarHeader">
+    <div class="container">
+      <div class="row">
+        
+          <ul class="list-unstyled">  
+            <li style="float:left;margin-left:6px"><a href="{% url 'index' %}" class="text-white">首页</a></li>
+            {% if user %}
+            <li class="text-white" style="float:left;margin-left:6px">{{ user.username }}</li>
+            <li style="float:left;margin-left:6px"><a href="{% url 'user' %}" class="text-white">个人中心</a></li>
+            <li style="float:left;margin-left:6px"><a href="{% url 'logout' %}" class="text-white">退出</a></li>
+            {% else %}
+            <li style="float:left;margin-left:6px"><a href="{% url 'login' %}" class="text-white">登录</a></li>
+            <li style="float:left;margin-left:6px"><a href="{% url 'register' %}" class="text-white">注册</a></li>
+            {% endif %}
+          </ul>
+      </div>
+    </div>
+  </div>
+</header>
+<main role="main">
+  <section class="jumbotron text-center">
+    <div class="container">
+      <h1 class="jumbotron-heading">聊天室首页</h1>
+    </div>
+  </section>
+  <div class="album py-5 bg-light">
+    <div class="container">
+      <div class="row">
+        {% for room_name in rooms %}
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect fill="#55595c" width="100%" height="100%"></rect><text fill="#eceeef" dy=".3em" x="50%" y="50%">Thumbnail</text></svg>
+            <div class="card-body">
+              <p class="card-text">本demo仅用来表示chatroom的使用场景，不实现完整聊天室网站</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <a href="{% url 'chat-room' room_name %}"><button type="button" class="btn btn-sm btn-primary"{% if is_active %} disabled style="cursor:default"{% endif %}>进入聊天室</button></a>
+                </div>
+                <small class="text-muted">9 mins</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</main>
+<footer class="text-muted">
+  <div class="container">
+    <p class="float-right">
+      <a href="#">Back to top</a>
+    </p>
+    <p>Album example is © Bootstrap, but please download and customize it for yourself!</p>
+    <p>New to Bootstrap? <a href="https://getbootstrap.com/">Visit the homepage</a> or read our <a href="https://getbootstrap.com/docs/4.2/getting-started/introduction/">getting started guide</a>.</p>
+  </div>
+</footer>
+<script src="{% static 'index_files/jquery-3.js' %}" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="/docs/4.2/assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+<script src="{% static 'index_files/bootstrap.js' %}" integrity="sha384-zDnhMsjVZfS3hiP7oCBRmfjkQC4fzxVxFhBx8Hkz2aZX8gEvA/jsP3eXRCvzTofP" crossorigin="anonymous"></script>
+</body>
+{% endblock body %}

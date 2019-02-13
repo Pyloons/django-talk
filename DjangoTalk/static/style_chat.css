@@ -1,0 +1,165 @@
+#chat-app {
+    width: 640px;
+    height: 480px;
+    border: 1px solid skyblue;
+    margin: auto;
+}
+
+#left-col {
+    width: 158px;
+    height: 478px;
+    float: left;
+    border: 1px solid skyblue;
+}
+
+#search-box {
+    height: 25px;
+}
+
+#search-box * {
+    vertical-align:top;
+    margin: 0;
+    padding: 0;
+}
+
+#search-box input {
+    width: 23px;
+    height: 23px;
+}
+
+#search-box div {
+    display: inline-block;
+    width: 23px;
+    height: 23px;
+    border: 1px solid black;
+}
+
+#search-content {
+    width: 65px !important;
+}
+
+#search-content input {
+    width: 60px;
+    height: 20px;
+    margin-bottom: 1px;
+}
+
+#channel-list {
+    width: 156px;
+    height: 478px;
+    border: 1px solid skyblue;
+}
+
+#channel-list ul {
+    margin: 0;
+    padding: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+#channel-list li {
+    list-style: none;
+    margin: 3px;
+}
+
+#right-col {
+    width: 478px;
+    height: 478px;
+    float: right;
+    border: 1px solid skyblue;
+}
+
+#chat-log {
+    margin: 0;
+    padding: 0;
+    width: 476px;
+    height: 388px;
+    border: 1px solid skyblue;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.msg-bullet {
+    list-style: none;
+    margin-top: 10px;
+}
+
+.msg-bullet span {
+    color: grey;
+}
+
+.msg-bullet p {
+    margin-left: 10px;
+}
+
+.msg-bullet * {
+    margin: 0px;
+}
+
+#input-panel {
+    font-size:0;
+    width: 476px;
+    height: 88px;
+    border: 1px solid skyblue;
+    background-color: skyblue;
+}
+
+#input-panel * {
+    vertical-align:bottom;
+    margin: 0;
+    display: inline-block;
+}
+
+#menu-area {
+    height: 84px;
+    width: 42px;
+    border: 1px solid gray;
+}
+
+#emoji-menu {
+    height: 40px;
+    width: 40px;
+    border: 1px solid black;
+}
+
+#pic-menu {
+    margin-top: 1px;
+    height: 40px;
+    width: 40px;
+    border: 1px solid black;
+}
+
+#msg-area {
+    margin-left: 1px;
+    height: 84px;
+    width: 384px;
+    border: 1px solid skyblue;
+}
+
+#msg {
+    margin-top: 1px;
+    margin-left: 1px;
+    border-radius: 5px;
+    resize: none;
+    width: 376px;
+    height: 76px;
+    font-size: 14px;
+}
+
+#submit-area {
+    margin-left: 1px;
+    height: 84px;
+    width: 84px;
+    border: 1px solid skyblue;
+}
+
+#submit-btn {
+    font-size: 20px;
+    text-align: center;
+    color: rgb(71, 71, 71);
+    margin: 1px;
+    border-radius: 5px;
+    height: 82px;
+    width: 82px;
+    border: 1px solid skyblue;
+}

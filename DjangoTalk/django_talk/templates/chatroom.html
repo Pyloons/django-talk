@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ room_name }}{% endblock title %}
+{% block body %}
+<body>
+    <header>
+  <div class="bg-dark" id="navbarHeader">
+    <div class="container">
+      <div class="row">
+        
+          <ul class="list-unstyled">  
+            <li style="float:left;margin-left:6px"><a href="{% url 'index' %}" class="text-white">首页</a></li>
+            {% if user.is_authenticated %}
+            <li class="text-white" style="float:left;margin-left:6px">{{ user.username }}</li>
+            <li style="float:left;margin-left:6px"><a href="{% url 'user' %}" class="text-white">个人中心</a></li>
+            <li style="float:left;margin-left:6px"><a href="{% url 'logout' %}" class="text-white">退出</a></li>
+            {% else %}
+            <li style="float:left;margin-left:6px"><a href="{% url 'login' %}" class="text-white">登录</a></li>
+            <li style="float:left;margin-left:6px"><a href="{% url 'register' %}" class="text-white">注册</a></li>
+            {% endif %}
+          </ul>
+      </div>
+    </div>
+  </div>
+</header>
+    <div id="chat-app">
+        <div id="left-col">
+            <div id="user-list">
+                <ul id="true-user-list">
+                </ul>
+            </div>
+        </div>
+        <div id="right-col">
+            <ul id="chat-log">
+            </ul>
+            <div id="input-panel">
+                    <div id="msg-area">
+                        <textarea id="msg" cols="80" rows="5" required></textarea>
+                    </div>
+                    <div id="submit-area">
+                        <button id="submit-btn">发 送</button>
+                    </div>
+            </div>
+        </div>
+    </div>
+    <link rel="stylesheet" href="{% static 'style_chat.css' %}">
+</body>
+<script>
+    var roomName = "{{ room_name }}";
+
+    var chatSocket = new WebSocket(
+        'ws://' + window.location.host +
+        '/ws/chat/' + roomName + '/');
+
+    chatSocket.onmessage = function(e) {
+        var data = JSON.parse(e.data);
+        var hasMessage = data['hasMessage'];
+        var userChange = data['userChange'];
+        if(hasMessage) {
+            var username = data['username'];
+            var time = data['time'];
+            var message = data['message'];
+            document.querySelector('#chat-log').innerHTML += (
+                '<li class="msg-bullet">\
+                        <span>' + username + '</span> <span>' + time + '</span>\
+                        <p>' + message + '</p>\
+            </li>');
+        }
+        if(userChange) {
+            var members = data['members'];
+            document.querySelector('#true-user-list').innerHTML = '';
+            members.forEach(username => {
+                document.querySelector('#true-user-list').innerHTML += ('<li id="user_'+ username +'">'+ username +'</li>\n');
+            });
+        }
+    };
+
+    chatSocket.onclose = function(e) {
+        console.error('Chat socket closed unexpectedly');
+    };
+
+    document.querySelector('#msg').focus();
+    document.querySelector('#msg').onkeyup = function(e) {
+        if (e.keyCode === 13) {  // enter, return
+            document.querySelector('#submit-btn').click();
+        }
+    };
+
+    document.querySelector('#submit-btn').onclick = function(e) {
+        var messageInputDom = document.querySelector('#msg');
+        var message = messageInputDom.value;
+        chatSocket.send(JSON.stringify({
+            'message': message
+        }));
+
+        messageInputDom.value = '';
+    };
+</script>
+{% endblock body %}

@@ -1,0 +1,15 @@
+#login-input {
+    text-align: center;
+}
+
+#login-input h1 {
+    margin-top: 10rem;
+}
+
+#login-input form {
+    display: inline-block;
+}
+
+#login-btn {
+    float: right;
+}

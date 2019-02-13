@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}登录{% endblock title %}
+
+{% block body %}
+<body class="text-center">
+
+  <form action="{% url 'login' %}" method="post" class="form-signin">
+    {% csrf_token %}
+    <img class="mb-4" src="{% static 'login_files/bootstrap-solid.svg' %}" alt="" width="72" height="72">
+    <h1 class="h3 mb-3 font-weight-normal">请登录</h1>
+    <label for="inputEmail" class="sr-only">用户名</label>
+    <input type="text" id="inputEmail" class="form-control" placeholder="用户名" name="username">
+    <label for="inputPassword" class="sr-only">密码</label>
+    <input type="password" id="inputPassword" class="form-control" placeholder="密码" name="password">
+    {% if callback %}<div class="alert alert-primary" role="alert">{{ callback }}</div>{% endif %}
+    <button class="btn btn-lg btn-primary btn-block" type="submit">登入</button>
+    <button onclick="window.location.href='{% url 'register' %}'" class="btn btn-lg btn-secondary btn-block" type="button">注册</button>
+    <p class="mt-5 mb-3 text-muted">It's a demo</p>
+  </form>
+
+  <!-- Custom styles for this template -->
+  <link href="{% static 'login_files/signin.css' %}" rel="stylesheet">
+
+</body>
+{% endblock body %}
